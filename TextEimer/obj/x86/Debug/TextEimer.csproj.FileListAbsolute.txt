@@ -1,0 +1,17 @@
+C:\Users\zizza.OFFICE\AppData\Local\Temporary Projects\TextEimer\bin\Debug\TextEimer.exe
+C:\Users\zizza.OFFICE\AppData\Local\Temporary Projects\TextEimer\bin\Debug\TextEimer.pdb
+C:\Users\zizza.OFFICE\AppData\Local\Temporary Projects\TextEimer\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\zizza.OFFICE\AppData\Local\Temporary Projects\TextEimer\obj\x86\Debug\TextEimer.Properties.Resources.resources
+C:\Users\zizza.OFFICE\AppData\Local\Temporary Projects\TextEimer\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\zizza.OFFICE\AppData\Local\Temporary Projects\TextEimer\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\zizza.OFFICE\AppData\Local\Temporary Projects\TextEimer\obj\x86\Debug\TextEimer.exe
+C:\Users\zizza.OFFICE\AppData\Local\Temporary Projects\TextEimer\obj\x86\Debug\TextEimer.pdb
+C:\Users\zizza.OFFICE\documents\visual studio 2010\Projects\TextEimer\TextEimer\obj\x86\Debug\TextEimer.exe
+C:\Users\zizza.OFFICE\documents\visual studio 2010\Projects\TextEimer\TextEimer\obj\x86\Debug\TextEimer.pdb
+C:\Users\zizza.OFFICE\documents\visual studio 2010\Projects\TextEimer\TextEimer\bin\Debug\TextEimer.exe
+C:\Users\zizza.OFFICE\documents\visual studio 2010\Projects\TextEimer\TextEimer\bin\Debug\TextEimer.pdb
+C:\Users\zizza.OFFICE\documents\visual studio 2010\Projects\TextEimer\TextEimer\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\zizza.OFFICE\documents\visual studio 2010\Projects\TextEimer\TextEimer\obj\x86\Debug\TextEimer.Properties.Resources.resources
+C:\Users\zizza.OFFICE\documents\visual studio 2010\Projects\TextEimer\TextEimer\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\zizza.OFFICE\documents\visual studio 2010\Projects\TextEimer\TextEimer\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\zizza.OFFICE\documents\visual studio 2010\Projects\TextEimer\TextEimer\obj\x86\Debug\TextEimer.Options.resources
