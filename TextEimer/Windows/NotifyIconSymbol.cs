@@ -9,11 +9,19 @@ namespace TextEimer.Windows
     {
         private NotifyIcon notifyIcon;
         
+        /// <summary>
+        /// Contructor of NotifyIconSymbol class
+        /// This class handles the NotifyIcon functionality
+        /// </summary>
+        /// <param name="notifyIcon">A NotifyIcon object</param>
         public NotifyIconSymbol(NotifyIcon notifyIcon)
         {
             this.notifyIcon = notifyIcon;
         }
 
+        /// <summary>
+        /// shows the ContextMenuStrip of the NotifyIcon with its options and clipboard history
+        /// </summary>
         public void ShowNotifyIconMenu()
         {
             this.notifyIcon.ContextMenuStrip.Focus();
