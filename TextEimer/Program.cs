@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 using TextEimer.Windows;
+using TextEimer.Clipboard;
 using MovablePython;
 
 namespace TextEimer
@@ -35,6 +36,8 @@ namespace TextEimer
                 hk.Pressed += delegate { notifyIconSymbol.ShowNotifyIconMenu(); };
 
                 hk.Register(notifyIconMenu.contextMenuStrip);
+                
+                ClipboardHandler clipboardHandler = new ClipboardHandler(notifyIconMenu);
 
                 Application.Run();
             }
