@@ -52,12 +52,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clipboard\ClipboardHandler.cs" />
+    <Compile Include="Clipboard\ClipboardHandler.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Clipboard\Container\Factory.cs" />
     <Compile Include="Clipboard\Container\Type\IType.cs" />
     <Compile Include="Clipboard\Container\Type\String.cs" />
     <Compile Include="Hotkey\Hotkey.cs" />
-    <Compile Include="Init.cs" />
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,11 +99,7 @@
     <Content Include="gpl.txt" />
     <None Include="Resources\licence.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Clipboard" />
-    <Folder Include="Clipboard\Container" />
-    <Folder Include="Clipboard\Container\Type" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

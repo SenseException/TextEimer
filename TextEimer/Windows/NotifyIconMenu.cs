@@ -54,7 +54,7 @@ namespace TextEimer.Windows
                 "Beenden",
                 null,
                 new EventHandler(Quit_Click),
-                "Exit"
+                "exit"
             ));
         }
     }

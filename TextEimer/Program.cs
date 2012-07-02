@@ -20,7 +20,8 @@ namespace TextEimer
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                NotifyIconMenu notifyIconMenu = new NotifyIconMenu(new ContextMenuStrip());
+                ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+                NotifyIconMenu notifyIconMenu = new NotifyIconMenu(contextMenuStrip);
 
                 NotifyIcon notifyIcon = new NotifyIcon();
                 notifyIcon.ContextMenuStrip = notifyIconMenu.contextMenuStrip;
