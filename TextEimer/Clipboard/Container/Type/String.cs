@@ -7,11 +7,13 @@ namespace TextEimer.Clipboard.Container.Type
 	{
 		private string key;
 		private object value;
+        private string menuValue;
 		private System.Type type;
 		
 		public String(string value)
 		{
 			this.value = (object) value;
+            this.MenuValue = value;
 			this.Key = value;
 			this.type = value.GetType();
 		}
@@ -45,6 +47,19 @@ namespace TextEimer.Clipboard.Container.Type
 				return this.value;
 			}
 		}
+
+        public string MenuValue
+        {
+            get
+            {
+                return this.menuValue;
+            }
+            set
+            {
+                value = value.Trim().Replace(Environment.NewLine, "");
+                this.menuValue = value;
+            }
+        }
 		
 		public System.Type ValueType
 		{

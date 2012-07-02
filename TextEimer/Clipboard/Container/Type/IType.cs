@@ -19,6 +19,15 @@ namespace TextEimer.Clipboard.Container.Type
 		object Value {
 			get;
 		}
+
+        /// <summary>
+        /// Returns the value of the Item as it is shown in the ContextMenuStrip
+        /// </summary>
+        string MenuValue
+        {
+            get;
+            set;
+        }
 		
 		/// <summary>
 		/// Returns the type of the Item
