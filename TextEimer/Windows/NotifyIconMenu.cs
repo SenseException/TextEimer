@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
+using TextEimer.Clipboard.Container.Type;
+
 namespace TextEimer.Windows
 {
     class NotifyIconMenu
     {
         private ContextMenuStrip notifyIconMenu;
+        private ToolStripSeparator toolStripSeparator;
+        private Dictionary<string, IType> items;
 
         /// <summary>
         /// Contructor of NotifyIconMenu class.
@@ -43,12 +47,25 @@ namespace TextEimer.Windows
         }
 
         /// <summary>
+        /// adds a new clipboard value to the items
+        /// </summary>
+        /// <param name="typeContainer">a type container</param>
+        public void Add(IType typeContainer)
+        {
+            this.items.Add(typeContainer.Key, typeContainer);
+
+            // TODO: check if the ContextMenuStrip can be build when the menu is called by ContextMenuStrip.Show
+            this.notifyIconMenu.Items.Clear();
+            this.BuildContextMenuStrip();
+        }
+
+        /// <summary>
         /// Adding additional options like exit button to the ContextMenuStrip
         /// </summary>
         private void AddControlMenuItems()
         {
-            ToolStripSeparator toolStripSeparator = new ToolStripSeparator();
-            this.notifyIconMenu.Items.Add(toolStripSeparator);
+            this.toolStripSeparator = new ToolStripSeparator();
+            this.notifyIconMenu.Items.Add(this.toolStripSeparator);
 
             this.notifyIconMenu.Items.Add(new ToolStripMenuItem(
                 "Beenden",
@@ -56,6 +73,29 @@ namespace TextEimer.Windows
                 new EventHandler(Quit_Click),
                 "exit"
             ));
+        }
+
+        private void BuildContextMenuStrip()
+        {
+            int limitCounter = 1;
+            int limit = 20;
+            foreach (KeyValuePair<string, IType> item in this.items)
+            {
+                this.notifyIconMenu.Items.Add(new ToolStripMenuItem(
+                    item.Value.MenuValue,
+                    null,
+                    new EventHandler(Quit_Click),
+                    item.Key
+                ));
+
+                limitCounter++;
+                if (limitCounter >= limit)
+                {
+                    break;
+                }
+            }
+
+            this.AddControlMenuItems();
         }
     }
 }
