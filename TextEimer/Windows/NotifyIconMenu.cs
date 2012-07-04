@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 using TextEimer.Clipboard.Container.Type;
+using Clip = System.Windows.Forms.Clipboard;
 
 namespace TextEimer.Windows
 {
     class NotifyIconMenu
     {
+        private ForegroundWindow foregroundWindow;
         private ContextMenuStrip notifyIconMenu;
         private ToolStripSeparator toolStripSeparator;
         private Dictionary<string, IType> items;
@@ -19,10 +22,12 @@ namespace TextEimer.Windows
         /// NotifyIcon in NotifyIconSymbol.
         /// </summary>
         /// <param name="contextMenuStrip">A ContextMenuStrip object for the clipboard history</param>
-        public NotifyIconMenu(ContextMenuStrip contextMenuStrip)
+        public NotifyIconMenu(ContextMenuStrip contextMenuStrip, ForegroundWindow foregroundWindow)
         {
             this.notifyIconMenu = contextMenuStrip;
-            this.AddControlMenuItems();
+            this.foregroundWindow = foregroundWindow;
+            this.items = new Dictionary<string, IType>();
+            this.BuildContextMenuStrip();
         }
 
         /// <summary>
@@ -33,6 +38,26 @@ namespace TextEimer.Windows
         private void Quit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Paste_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem clickedItem = (ToolStripMenuItem) sender;
+            string key = clickedItem.Name;
+            string value;
+
+            if (this.items.ContainsKey(key))
+            {
+                value = (string) this.items[key].Value;
+                Clip.SetText(value);
+                this.foregroundWindow.SetFocusedWindow();
+                this.PasteValue();
+            }
+        }
+
+        private void PasteValue()
+        {
+            SendKeys.Send("^v");
         }
 
         /// <summary>
@@ -84,7 +109,7 @@ namespace TextEimer.Windows
                 this.notifyIconMenu.Items.Add(new ToolStripMenuItem(
                     item.Value.MenuValue,
                     null,
-                    new EventHandler(Quit_Click),
+                    new EventHandler(Paste_Click),
                     item.Key
                 ));
 

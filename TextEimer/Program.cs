@@ -20,15 +20,17 @@ namespace TextEimer
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
+                ForegroundWindow foregroundWindow = new ForegroundWindow();
+
                 ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
-                NotifyIconMenu notifyIconMenu = new NotifyIconMenu(contextMenuStrip);
+                NotifyIconMenu notifyIconMenu = new NotifyIconMenu(contextMenuStrip, foregroundWindow);
 
                 NotifyIcon notifyIcon = new NotifyIcon();
                 notifyIcon.ContextMenuStrip = notifyIconMenu.contextMenuStrip;
                 notifyIcon.Icon = (System.Drawing.Icon)TextEimer.Properties.Resources.ResourceManager.GetObject("bucket");
                 notifyIcon.Text = "TextEimer";
                 notifyIcon.Visible = true;
-                NotifyIconSymbol notifyIconSymbol = new NotifyIconSymbol(notifyIcon);
+                NotifyIconSymbol notifyIconSymbol = new NotifyIconSymbol(notifyIcon, foregroundWindow);
 
                 Hotkey hk = new Hotkey();
 
