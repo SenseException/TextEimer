@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Security.Cryptography;
+using Clip = System.Windows.Forms.Clipboard;
 
 namespace TextEimer.Clipboard.Container.Type
 {
@@ -56,7 +58,13 @@ namespace TextEimer.Clipboard.Container.Type
             }
             set
             {
-                value = value.Trim().Replace(Environment.NewLine, "");
+                value = Regex.Replace(value, "[\n\r\t]+", "", RegexOptions.None);
+                value = Regex.Replace(value, "[ ]{2,}", " ", RegexOptions.None);
+                
+                if (value.Length > 50)
+                {
+                    value = value.Remove(50);
+                }
                 this.menuValue = value;
             }
         }
@@ -68,5 +76,10 @@ namespace TextEimer.Clipboard.Container.Type
 				return this.type;
 			}
 		}
+
+        public void AddValueToClipboard()
+        {
+            Clip.SetText((string) this.value);
+        }
 	}
 }

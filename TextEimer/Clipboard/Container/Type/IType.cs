@@ -35,5 +35,7 @@ namespace TextEimer.Clipboard.Container.Type
 		System.Type ValueType {
 			get;
 		}
+
+        void AddValueToClipboard();
 	}
 }
