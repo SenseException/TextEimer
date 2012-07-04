@@ -69,6 +69,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Settings\XmlSettings.cs" />
+    <Compile Include="Windows\ForegroundWindow.cs" />
     <Compile Include="Windows\NotifyIconSymbol.cs" />
     <Compile Include="Windows\NotifyIconMenu.cs" />
     <EmbeddedResource Include="Options.resx">

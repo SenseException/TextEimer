@@ -74,13 +74,14 @@ namespace TextEimer.Clipboard
             switch (m.Msg)
             {
                 case WM_DRAWCLIPBOARD:
-                    SendMessage(this.nextClipboardViewer, m.Msg, m.WParam, m.LParam);
                     ContainerType.IType typeContainer = Factory.CreateTypeContainer();
-                    
+
                     if (null != typeContainer) {
-                    	
+                        this.notifyIconMenu.Add(typeContainer);
                     }
                     
+                    SendMessage(this.nextClipboardViewer, m.Msg, m.WParam, m.LParam);
+
                     break;
 
                 case WM_CHANGECBCHAIN:
