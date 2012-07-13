@@ -14,7 +14,7 @@ namespace TextEimer.Windows
         private ForegroundWindow foregroundWindow;
         private ContextMenuStrip notifyIconMenu;
         private ToolStripSeparator toolStripSeparator;
-        private Dictionary<string, IType> items;
+        private List<IType> items;
         private int limit = 4; // TODO: max. items for ContextMenuStrip/Dictionary<string, IType>. Will be later replaced by config value
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace TextEimer.Windows
         {
             this.notifyIconMenu = contextMenuStrip;
             this.foregroundWindow = foregroundWindow;
-            this.items = new Dictionary<string, IType>();
+            this.items = new List<IType>();
             this.notifyIconMenu.KeyUp += DeleteItem_KeyUp;
             this.BuildContextMenuStrip();
         }
@@ -42,17 +42,72 @@ namespace TextEimer.Windows
             Application.Exit();
         }
 
+        /// <summary>
+        /// Click event for ContextMenuStrip items to load and paste new clipboard value from list
+        /// </summary>
+        /// <param name="sender">sender object</param>
+        /// <param name="e">Event Arguments</param>
         private void Paste_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem clickedItem = (ToolStripMenuItem) sender;
             string key = clickedItem.Name;
 
-            if (this.items.ContainsKey(key))
+            if (this.Contains(key))
             {
-                this.items[key].AddValueToClipboard();
+                IType typeContainer = this.FindByKey(key);
+                typeContainer.AddValueToClipboard();
                 this.foregroundWindow.SetFocusedWindow();
                 this.PasteValue();
             }
+        }
+
+        private IType FindByKey(string key)
+        {
+            IType typeContainer = null;
+            try 
+            {
+                typeContainer = this.items.Where<IType>(type => type.Key == key).Single<IType>();
+                
+            }
+            catch (Exception e)
+            {
+                // TODO log Exception when log-class is ready
+            }
+
+            return typeContainer;
+        }
+
+        private void RemoveByKey(string key)
+        {
+            try
+            {
+                int index = this.items.FindIndex(type => type.Key == key);
+                this.items.RemoveAt(index);
+            }
+            catch (Exception e)
+            {
+                // TODO log Exception when log-class is ready
+            }
+        }
+
+        private bool Contains(string key)
+        {
+            bool containsKey = false;
+            try
+            {
+                IType typeContainer = this.FindByKey(key);
+                if (null != typeContainer && typeContainer.Key == key)
+                {
+                    containsKey = true;
+                }
+            }
+            catch (Exception e)
+            {
+                containsKey = false;
+                // TODO log Exception when log-class is ready
+            }
+
+            return containsKey;
         }
 
         /// <summary>
@@ -68,15 +123,14 @@ namespace TextEimer.Windows
                 {
                     if (item.Selected)
                     {
-                        bool itemExists = false;
                         // check if the item exists in items list
-                        if (this.items.ContainsKey(item.Name))
+                        if (this.Contains(item.Name))
                         {
-                            itemExists = this.items.Remove(item.Name);
+                            this.RemoveByKey(item.Name);
                         }
 
                         // if ToolStripItem is not a Control element then delete ToolStripItem
-                        if (itemExists)
+                        if (this.notifyIconMenu.Items.ContainsKey(item.Name))
                         {
                             this.notifyIconMenu.Items.RemoveByKey(item.Name);
                         }
@@ -113,22 +167,18 @@ namespace TextEimer.Windows
         {
             try
             {
-                // remove item if same typeContainer exists in list
-                if (this.items.ContainsKey(typeContainer.Key))
+                 //remove item if same typeContainer exists in list
+                if (this.Contains(typeContainer.Key))
                 {
-                    this.items.Remove(typeContainer.Key);
+                    this.RemoveByKey(typeContainer.Key);
                 }
 
-                this.items.Add(typeContainer.Key, typeContainer);
+                this.items.Add(typeContainer);
 
                 // remove oldest entry if count of items is bigger than the defined limit
-                if (this.items.Count > this.limit)
+                if (this.items.Count >= this.limit)
                 {
-                    KeyValuePair<string, IType> firstItem = this.items.First();
-                    if (this.items.ContainsKey(firstItem.Key))
-                    {
-                        this.items.Remove(firstItem.Key);
-                    }
+                    this.items.Remove(this.items.First());
                 }
 
                 // TODO: check if the ContextMenuStrip can be build when the menu is called by ContextMenuStrip.Show
@@ -168,10 +218,10 @@ namespace TextEimer.Windows
                 int limitCounter = 1;
                 ToolStripMenuItem currentItem = null;
 
-                foreach (KeyValuePair<string, IType> item in this.items)
+                foreach (IType item in this.items)
                 {
                     currentItem = new ToolStripMenuItem(
-                        item.Value.MenuValue,
+                        item.MenuValue,
                         null,
                         new EventHandler(Paste_Click),
                         item.Key
