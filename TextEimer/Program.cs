@@ -36,12 +36,20 @@ namespace TextEimer
 
                 hk.KeyCode = Keys.Y;
                 hk.Windows = true;
-                hk.Pressed += delegate { notifyIconSymbol.ShowNotifyIconMenu(); };
+                hk.Pressed += delegate {
+                	notifyIconSymbol.ShowNotifyIconMenu(); 
+                };
 
                 hk.Register(notifyIconMenu.contextMenuStrip);
                 
                 ClipboardHandler clipboardHandler = new ClipboardHandler(notifyIconMenu);
 
+                Application.ApplicationExit += delegate {
+                	if (hk.Registered)
+                	{
+                		hk.Unregister();
+                	}
+                };
                 Application.Run();
             }
         }

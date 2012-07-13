@@ -15,7 +15,7 @@ namespace TextEimer.Windows
         private ContextMenuStrip notifyIconMenu;
         private ToolStripSeparator toolStripSeparator;
         private List<IType> items;
-        private int limit = 4; // TODO: max. items for ContextMenuStrip/Dictionary<string, IType>. Will be later replaced by config value
+        private int limit = 20; // TODO: max. items for ContextMenuStrip/Dictionary<string, IType>. Will be later replaced by config value
 
         /// <summary>
         /// Contructor of NotifyIconMenu class.
@@ -35,8 +35,8 @@ namespace TextEimer.Windows
         /// <summary>
         /// Click Event which exits TextEimer
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">sender object</param>
+        /// <param name="e">Event Arguments</param>
         private void Quit_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -61,6 +61,11 @@ namespace TextEimer.Windows
             }
         }
 
+        /// <summary>
+        /// search and returns a Type Container from the List by its key name
+        /// </summary>
+        /// <param name="key">IType key name of the list element</param>
+        /// <returns>A Type Container of the interface IType</returns>
         private IType FindByKey(string key)
         {
             IType typeContainer = null;
@@ -77,6 +82,10 @@ namespace TextEimer.Windows
             return typeContainer;
         }
 
+        /// <summary>
+        /// removes an element from the list by its IType key name
+        /// </summary>
+        /// <param name="key">IType key name of the list element</param>
         private void RemoveByKey(string key)
         {
             try
@@ -90,6 +99,12 @@ namespace TextEimer.Windows
             }
         }
 
+        /// <summary>
+        /// checks if a IType key name is in the list
+        /// </summary>
+        /// <param name="key">IType key name of the list element</param>
+        /// <returns>returns true id key exists. Else it returns false. 
+        /// In case of an error it also returns false</returns>
         private bool Contains(string key)
         {
             bool containsKey = false;
@@ -103,7 +118,6 @@ namespace TextEimer.Windows
             }
             catch (Exception e)
             {
-                containsKey = false;
                 // TODO log Exception when log-class is ready
             }
 
