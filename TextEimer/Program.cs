@@ -39,7 +39,7 @@ namespace TextEimer
                 hk.KeyCode = Keys.Y;
                 hk.Windows = true;
                 hk.Pressed += delegate {
-                	notifyIconSymbol.ShowNotifyIconMenu(); 
+                	notifyIconSymbol.ShowNotifyIconMenu();
                 };
 
                 hk.Register(notifyIconMenu.contextMenuStrip);
