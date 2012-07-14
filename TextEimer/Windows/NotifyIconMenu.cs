@@ -11,7 +11,7 @@ namespace TextEimer.Windows
 {
     class NotifyIconMenu
     {
-        private ForegroundWindow foregroundWindow;
+        private ForegroundWindow foregroundWindow = null;
         private ContextMenuStrip notifyIconMenu;
         private ToolStripSeparator toolStripSeparator;
         private List<IType> items;
@@ -23,10 +23,9 @@ namespace TextEimer.Windows
         /// NotifyIcon in NotifyIconSymbol.
         /// </summary>
         /// <param name="contextMenuStrip">A ContextMenuStrip object for the clipboard history</param>
-        public NotifyIconMenu(ContextMenuStrip contextMenuStrip, ForegroundWindow foregroundWindow)
+        public NotifyIconMenu(ContextMenuStrip contextMenuStrip)
         {
             this.notifyIconMenu = contextMenuStrip;
-            this.foregroundWindow = foregroundWindow;
             this.items = new List<IType>();
             this.notifyIconMenu.KeyUp += DeleteItem_KeyUp;
             this.BuildContextMenuStrip();
@@ -56,7 +55,10 @@ namespace TextEimer.Windows
             {
                 IType typeContainer = this.FindByKey(key);
                 typeContainer.AddValueToClipboard();
-                this.foregroundWindow.SetFocusedWindow();
+                if (null != this.foregroundWindow)
+                {
+                	this.foregroundWindow.SetFocusedWindow();
+                }
                 this.PasteValue();
             }
         }
@@ -171,6 +173,21 @@ namespace TextEimer.Windows
             {
                 return this.notifyIconMenu;
             }
+        }
+        
+        /// <summary>
+        /// The foreground window class used for getting the last focused IntPtr.
+        /// </summary>
+        public ForegroundWindow FocusHandler
+        {
+        	set
+        	{
+        		this.foregroundWindow = value;
+        	}
+        	get
+        	{
+        		return this.foregroundWindow;
+        	}
         }
 
         /// <summary>

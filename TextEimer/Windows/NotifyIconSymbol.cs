@@ -8,17 +8,31 @@ namespace TextEimer.Windows
     class NotifyIconSymbol
     {
         private NotifyIcon notifyIcon;
-        private ForegroundWindow foregroundWindow;
+        private ForegroundWindow foregroundWindow = null;
         
         /// <summary>
         /// Contructor of NotifyIconSymbol class
         /// This class handles the NotifyIcon functionality
         /// </summary>
         /// <param name="notifyIcon">A NotifyIcon object</param>
-        public NotifyIconSymbol(NotifyIcon notifyIcon, ForegroundWindow foregroundWindow)
+        public NotifyIconSymbol(NotifyIcon notifyIcon)
         {
             this.notifyIcon = notifyIcon;
-            this.foregroundWindow = foregroundWindow;
+        }
+        
+        /// <summary>
+        /// The foreground window class used for getting the last focused IntPtr.
+        /// </summary>
+        public ForegroundWindow FocusHandler
+        {
+        	set
+        	{
+        		this.foregroundWindow = value;
+        	}
+        	get
+        	{
+        		return this.foregroundWindow;
+        	}
         }
 
         /// <summary>
@@ -26,7 +40,10 @@ namespace TextEimer.Windows
         /// </summary>
         public void ShowNotifyIconMenu()
         {
-            this.foregroundWindow.GetFocusedWindow();
+            if (null != this.foregroundWindow)
+            {
+            	this.foregroundWindow.GetFocusedWindow();
+            }
             this.notifyIcon.ContextMenuStrip.Focus();
             this.notifyIcon.ContextMenuStrip.Show(Cursor.Position.X, Cursor.Position.Y);
             this.notifyIcon.ContextMenuStrip.BringToFront();
