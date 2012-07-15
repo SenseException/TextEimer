@@ -17,7 +17,15 @@ namespace TextEimer
             System.Threading.Mutex Mu = new System.Threading.Mutex(false, "{ed4a1d54-416d-47eb-adb6-9a2d47e96774}");
             if (Mu.WaitOne(0, false))
             {
-                Application.EnableVisualStyles();
+            	// loading settings
+            	if (!Properties.Settings.Default.Updated)
+            	{
+            		Properties.Settings.Default.Upgrade();
+            		Properties.Settings.Default.Updated = true;
+            		Properties.Settings.Default.Save();
+            	}
+            	
+            	Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
                 ForegroundWindow foregroundWindow = new ForegroundWindow();
