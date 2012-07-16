@@ -250,8 +250,16 @@ namespace TextEimer.Windows
                 this.notifyIconMenu.Items.Clear();
 
                 ToolStripMenuItem currentItem = null;
+                ToolStripMenuItem firstItem = null;
+                List<IType> items = this.items;
+                bool isOrderDesc = this.settings.OrderDesc;
 
-                foreach (IType item in this.items)
+                if (isOrderDesc)
+                {
+                    items.Reverse();
+                }
+
+                foreach (IType item in items)
                 {
                     currentItem = new ToolStripMenuItem(
                         item.MenuValue,
@@ -259,14 +267,23 @@ namespace TextEimer.Windows
                         new EventHandler(Paste_Click),
                         item.Key
                     );
+                    if (isOrderDesc && null == firstItem)
+                    {
+                        firstItem = currentItem;
+                    }
 
                     this.notifyIconMenu.Items.Add(currentItem);
                 }
 
                 this.AddControlMenuItems();
-                if (null != currentItem)
+
+                if (null != currentItem && !isOrderDesc)
                 {
                     currentItem.Select();
+                }
+                if (null != firstItem && isOrderDesc)
+                {
+                    firstItem.Select();
                 }
             }
             catch (Exception e)
