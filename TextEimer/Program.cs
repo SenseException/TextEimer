@@ -47,7 +47,7 @@ namespace TextEimer
                 #region global Hotkey
                 Hotkey hk = new Hotkey();
 
-                hk.KeyCode = Keys.Y;
+                hk.KeyCode = Keys.V;
                 hk.Windows = true;
                 hk.Pressed += delegate {
                 	notifyIconSymbol.ShowNotifyIconMenu();
