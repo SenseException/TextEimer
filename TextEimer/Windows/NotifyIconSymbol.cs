@@ -44,9 +44,9 @@ namespace TextEimer.Windows
             {
             	this.foregroundWindow.GetFocusedWindow();
             }
-            this.notifyIcon.ContextMenuStrip.Focus();
             this.notifyIcon.ContextMenuStrip.Show(Cursor.Position.X, Cursor.Position.Y);
             this.notifyIcon.ContextMenuStrip.BringToFront();
+            this.notifyIcon.ContextMenuStrip.Focus();
         }
     }
 }
