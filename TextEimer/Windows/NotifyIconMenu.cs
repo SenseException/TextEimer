@@ -250,11 +250,15 @@ namespace TextEimer.Windows
                 this.notifyIconMenu.Items.Clear();
 
                 ToolStripMenuItem currentItem = null;
-                ToolStripMenuItem firstItem = null;
                 List<IType> items = this.items;
-                bool isOrderDesc = this.settings.OrderDesc;
+                string latestItemKey = "";
+                	
+                if (items.Count > 0)
+                {
+                	latestItemKey = items.Last().Key;
+                }
 
-                if (isOrderDesc)
+                if (this.settings.OrderDesc)
                 {
                     items.Reverse();
                 }
@@ -267,24 +271,16 @@ namespace TextEimer.Windows
                         new EventHandler(Paste_Click),
                         item.Key
                     );
-                    if (isOrderDesc && null == firstItem)
-                    {
-                        firstItem = currentItem;
-                    }
 
                     this.notifyIconMenu.Items.Add(currentItem);
+                    
+                    if (latestItemKey == item.Key)
+                    {
+                    	currentItem.Select();
+                    }
                 }
 
                 this.AddControlMenuItems();
-
-                if (null != currentItem && !isOrderDesc)
-                {
-                    currentItem.Select();
-                }
-                if (null != firstItem && isOrderDesc)
-                {
-                    firstItem.Select();
-                }
             }
             catch (Exception e)
             {
