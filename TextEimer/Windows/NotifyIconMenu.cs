@@ -31,7 +31,6 @@ namespace TextEimer.Windows
 
             this.items = new List<IType>();
             this.notifyIconMenu.KeyUp += DeleteItem_KeyUp;
-            this.BuildContextMenuStrip();
         }
 
         /// <summary>
@@ -214,9 +213,6 @@ namespace TextEimer.Windows
                 {
                     this.items.Remove(this.items.First());
                 }
-
-                // TODO: check if the ContextMenuStrip can be build when the menu is called by ContextMenuStrip.Show
-                this.BuildContextMenuStrip();
             }
             catch (Exception e)
             {
@@ -243,7 +239,7 @@ namespace TextEimer.Windows
         /// <summary>
         /// builds the ContextMenuStrip with the clipboard value history and the Control Items
         /// </summary>
-        private void BuildContextMenuStrip()
+        public void BuildContextMenuStrip()
         {
             try
             {

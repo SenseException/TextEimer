@@ -38,8 +38,8 @@ namespace TextEimer
                 notifyIcon.Icon = (System.Drawing.Icon)TextEimer.Properties.Resources.ResourceManager.GetObject("bucket");
                 notifyIcon.Text = "TextEimer";
                 notifyIcon.Visible = true;
-                NotifyIconSymbol notifyIconSymbol = new NotifyIconSymbol(notifyIcon);
-                notifyIconSymbol.FocusHandler = foregroundWindow;
+                notifyIcon.Click += delegate { notifyIconMenu.BuildContextMenuStrip(); };
+                NotifyIconSymbol notifyIconSymbol = new NotifyIconSymbol(notifyIcon, notifyIconMenu);
                 #endregion
 
                 ClipboardHandler clipboardHandler = new ClipboardHandler(notifyIconMenu);
