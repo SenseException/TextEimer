@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 using TextEimer.Clipboard.Container.Type;
+using TextEimer.Config;
 using Clip = System.Windows.Forms.Clipboard;
 
 namespace TextEimer.Windows
@@ -13,9 +14,9 @@ namespace TextEimer.Windows
     {
         private ForegroundWindow foregroundWindow = null;
         private ContextMenuStrip notifyIconMenu;
+        private Settings settings;
         private ToolStripSeparator toolStripSeparator;
         private List<IType> items;
-        private int limit = 20; // TODO: max. items for ContextMenuStrip/Dictionary<string, IType>. Will be later replaced by config value
 
         /// <summary>
         /// Contructor of NotifyIconMenu class.
@@ -23,9 +24,11 @@ namespace TextEimer.Windows
         /// NotifyIcon in NotifyIconSymbol.
         /// </summary>
         /// <param name="contextMenuStrip">A ContextMenuStrip object for the clipboard history</param>
-        public NotifyIconMenu(ContextMenuStrip contextMenuStrip)
+        public NotifyIconMenu(ContextMenuStrip contextMenuStrip, Settings settings)
         {
             this.notifyIconMenu = contextMenuStrip;
+            this.settings = settings;
+
             this.items = new List<IType>();
             this.notifyIconMenu.KeyUp += DeleteItem_KeyUp;
             this.BuildContextMenuStrip();
@@ -198,7 +201,7 @@ namespace TextEimer.Windows
         {
             try
             {
-                 //remove item if same typeContainer exists in list
+                //remove item if same typeContainer exists in list
                 if (this.Contains(typeContainer.Key))
                 {
                     this.RemoveByKey(typeContainer.Key);
@@ -207,7 +210,7 @@ namespace TextEimer.Windows
                 this.items.Add(typeContainer);
 
                 // remove oldest entry if count of items is bigger than the defined limit
-                if (this.items.Count >= this.limit)
+                if (this.items.Count >= this.settings.MenuItemAmount)
                 {
                     this.items.Remove(this.items.First());
                 }
@@ -246,7 +249,6 @@ namespace TextEimer.Windows
             {
                 this.notifyIconMenu.Items.Clear();
 
-                int limitCounter = 1;
                 ToolStripMenuItem currentItem = null;
 
                 foreach (IType item in this.items)
@@ -259,12 +261,6 @@ namespace TextEimer.Windows
                     );
 
                     this.notifyIconMenu.Items.Add(currentItem);
-
-                    limitCounter++;
-                    if (limitCounter >= this.limit)
-                    {
-                        break;
-                    }
                 }
 
                 this.AddControlMenuItems();

@@ -59,6 +59,7 @@
     <Compile Include="Clipboard\Container\Factory.cs" />
     <Compile Include="Clipboard\Container\Type\IType.cs" />
     <Compile Include="Clipboard\Container\Type\String.cs" />
+    <Compile Include="Config\Settings.cs" />
     <Compile Include="Hotkey\Hotkey.cs" />
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
@@ -84,6 +85,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

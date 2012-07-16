@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Configuration;
 
 using TextEimer.Windows;
 using TextEimer.Clipboard;
+using TextEimer.Config;
 using MovablePython;
 
 namespace TextEimer
@@ -17,23 +19,20 @@ namespace TextEimer
             System.Threading.Mutex Mu = new System.Threading.Mutex(false, "{ed4a1d54-416d-47eb-adb6-9a2d47e96774}");
             if (Mu.WaitOne(0, false))
             {
-            	// loading settings
-            	if (!Properties.Settings.Default.Updated)
-            	{
-            		Properties.Settings.Default.Upgrade();
-            		Properties.Settings.Default.Updated = true;
-            		Properties.Settings.Default.Save();
-            	}
-            	
-            	Application.EnableVisualStyles();
+                Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
+
+                Settings settings = new Settings();
 
                 ForegroundWindow foregroundWindow = new ForegroundWindow();
 
+                #region NotifyIconMenu
                 ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
-                NotifyIconMenu notifyIconMenu = new NotifyIconMenu(contextMenuStrip);
+                NotifyIconMenu notifyIconMenu = new NotifyIconMenu(contextMenuStrip, settings);
                 notifyIconMenu.FocusHandler = foregroundWindow;
+                #endregion
 
+                #region NotifyIcon
                 NotifyIcon notifyIcon = new NotifyIcon();
                 notifyIcon.ContextMenuStrip = notifyIconMenu.contextMenuStrip;
                 notifyIcon.Icon = (System.Drawing.Icon)TextEimer.Properties.Resources.ResourceManager.GetObject("bucket");
@@ -41,7 +40,11 @@ namespace TextEimer
                 notifyIcon.Visible = true;
                 NotifyIconSymbol notifyIconSymbol = new NotifyIconSymbol(notifyIcon);
                 notifyIconSymbol.FocusHandler = foregroundWindow;
+                #endregion
 
+                ClipboardHandler clipboardHandler = new ClipboardHandler(notifyIconMenu);
+
+                #region global Hotkey
                 Hotkey hk = new Hotkey();
 
                 hk.KeyCode = Keys.Y;
@@ -51,8 +54,6 @@ namespace TextEimer
                 };
 
                 hk.Register(notifyIconMenu.contextMenuStrip);
-                
-                ClipboardHandler clipboardHandler = new ClipboardHandler(notifyIconMenu);
 
                 Application.ApplicationExit += delegate {
                 	if (hk.Registered)
@@ -60,6 +61,8 @@ namespace TextEimer
                 		hk.Unregister();
                 	}
                 };
+                #endregion
+
                 Application.Run();
             }
         }
