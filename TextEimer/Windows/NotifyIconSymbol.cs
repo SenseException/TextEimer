@@ -32,8 +32,15 @@ namespace TextEimer.Windows
             }
             this.notifyIconMenu.BuildContextMenuStrip();
             this.notifyIcon.ContextMenuStrip.Show(Cursor.Position.X, Cursor.Position.Y);
-            this.notifyIcon.ContextMenuStrip.BringToFront();
-            this.notifyIcon.ContextMenuStrip.Focus();
+            if (null != this.notifyIconMenu.FocusHandler)
+            {
+                this.notifyIconMenu.FocusHandler.SetFocusedWindow(new System.Runtime.InteropServices.HandleRef(this.notifyIcon.ContextMenuStrip, this.notifyIcon.ContextMenuStrip.Handle));
+            }
+            else
+            {
+                this.notifyIcon.ContextMenuStrip.BringToFront();
+                this.notifyIcon.ContextMenuStrip.Focus();
+            }
         }
     }
 }

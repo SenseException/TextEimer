@@ -14,6 +14,8 @@ namespace TextEimer.Windows
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool SetForegroundWindow(IntPtr hwnd);
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern bool SetForegroundWindow(HandleRef hWnd);
         
         private IntPtr foregroundWindow;
 
@@ -41,6 +43,14 @@ namespace TextEimer.Windows
         public void SetFocusedWindow()
         {
             SetForegroundWindow(this.foregroundWindow);
+        }
+        /// <summary>
+        /// sets the focus to a given HandleRef
+        /// </summary>
+        /// <param name="handle">a HandleRef Object which should get the focus</param>
+        public void SetFocusedWindow(HandleRef handle)
+        {
+            SetForegroundWindow(handle);
         }
     }
 }
