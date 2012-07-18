@@ -38,14 +38,14 @@ namespace TextEimer.Windows
         }
 
         /// <summary>
-        /// sets the focus to the handle got by GetFocusedWindow()
+        /// sets the focus to the handle of a control
         /// </summary>
         public void SetFocusedWindow()
         {
             SetForegroundWindow(this.foregroundWindow);
         }
         /// <summary>
-        /// sets the focus to a given HandleRef
+        /// sets the focus to the handle of a control
         /// </summary>
         /// <param name="handle">a HandleRef Object which should get the focus</param>
         public void SetFocusedWindow(HandleRef handle)
