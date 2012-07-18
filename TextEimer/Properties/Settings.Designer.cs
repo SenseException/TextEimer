@@ -61,13 +61,25 @@ namespace TextEimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool AutostartOn {
             get {
                 return ((bool)(this["AutostartOn"]));
             }
             set {
                 this["AutostartOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LoggingOn {
+            get {
+                return ((bool)(this["LoggingOn"]));
+            }
+            set {
+                this["LoggingOn"] = value;
             }
         }
     }
