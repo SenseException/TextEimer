@@ -55,6 +55,18 @@ namespace TextEimer.Config
             }
         }
 
+        public bool LoggingOn
+        {
+            get
+            {
+                return Properties.Settings.Default.LoggingOn;
+            }
+            set
+            {
+                Properties.Settings.Default.LoggingOn = value;
+            }
+        }
+
         public void Save()
         {
             Properties.Settings.Default.Save();
