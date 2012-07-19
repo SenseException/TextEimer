@@ -30,7 +30,8 @@ namespace TextEimer.Windows
             this.settings = settings;
 
             this.items = new List<IType>();
-            this.notifyIconMenu.KeyUp += DeleteItem_KeyUp;
+            this.notifyIconMenu.KeyUp += SelectedToolStripItem_KeyUp;
+
         }
 
         /// <summary>
@@ -51,6 +52,55 @@ namespace TextEimer.Windows
         private void Paste_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem clickedItem = (ToolStripMenuItem) sender;
+            this.AddToClipboard(clickedItem, true);
+        }
+
+        /// <summary>
+        /// deletes an item from the TextEimer item list with the "del" resp "entf" keyboard key
+        /// </summary>
+        /// <param name="sender">sender object of eventhandler</param>
+        /// <param name="e">event aruments of eventhandler</param>
+        private void SelectedToolStripItem_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Shift && e.KeyCode == Keys.Enter)
+            {
+                foreach (ToolStripItem item in this.notifyIconMenu.Items)
+                {
+                    if (item.Selected)
+                    {
+                        if (this.notifyIconMenu.Items.ContainsKey(item.Name))
+                        {
+                            this.AddToClipboard(item, false);
+                        }
+                        break;
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                foreach (ToolStripItem item in this.notifyIconMenu.Items)
+                {
+                    if (item.Selected)
+                    {
+                        // check if the item exists in items list
+                        if (this.Contains(item.Name))
+                        {
+                            this.RemoveByKey(item.Name);
+                        }
+
+                        // if ToolStripItem is not in Control element then delete ToolStripItem
+                        if (this.notifyIconMenu.Items.ContainsKey(item.Name))
+                        {
+                            this.notifyIconMenu.Items.RemoveByKey(item.Name);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void AddToClipboard(ToolStripItem clickedItem, bool isPasteActive)
+        {
             string key = clickedItem.Name;
 
             if (this.Contains(key))
@@ -59,9 +109,13 @@ namespace TextEimer.Windows
                 typeContainer.AddValueToClipboard();
                 if (null != this.foregroundWindow)
                 {
-                	this.foregroundWindow.SetFocusedWindow();
+                    this.foregroundWindow.SetFocusedWindow();
                 }
-                this.PasteValue();
+
+                if (isPasteActive)
+                {
+                    this.PasteValue();
+                }
             }
         }
 
@@ -73,10 +127,10 @@ namespace TextEimer.Windows
         private IType FindByKey(string key)
         {
             IType typeContainer = null;
-            try 
+            try
             {
                 typeContainer = this.items.Where<IType>(type => type.Key == key).Single<IType>();
-                
+
             }
             catch (Exception e)
             {
@@ -129,36 +183,6 @@ namespace TextEimer.Windows
         }
 
         /// <summary>
-        /// deletes an item from the TextEimer item list with the "del" resp "entf" keyboard key
-        /// </summary>
-        /// <param name="sender">sender object of eventhandler</param>
-        /// <param name="e">event aruments of eventhandler</param>
-        private void DeleteItem_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-                foreach (ToolStripItem item in this.notifyIconMenu.Items)
-                {
-                    if (item.Selected)
-                    {
-                        // check if the item exists in items list
-                        if (this.Contains(item.Name))
-                        {
-                            this.RemoveByKey(item.Name);
-                        }
-
-                        // if ToolStripItem is not a Control element then delete ToolStripItem
-                        if (this.notifyIconMenu.Items.ContainsKey(item.Name))
-                        {
-                            this.notifyIconMenu.Items.RemoveByKey(item.Name);
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// Paste the clipboard value
         /// </summary>
         private void PasteValue()
@@ -176,20 +200,20 @@ namespace TextEimer.Windows
                 return this.notifyIconMenu;
             }
         }
-        
+
         /// <summary>
         /// The foreground window class used for getting the last focused IntPtr.
         /// </summary>
         public ForegroundWindow FocusHandler
         {
-        	set
-        	{
-        		this.foregroundWindow = value;
-        	}
-        	get
-        	{
-        		return this.foregroundWindow;
-        	}
+            set
+            {
+                this.foregroundWindow = value;
+            }
+            get
+            {
+                return this.foregroundWindow;
+            }
         }
 
         /// <summary>
@@ -248,10 +272,10 @@ namespace TextEimer.Windows
                 ToolStripMenuItem currentItem = null;
                 List<IType> items = this.items;
                 string latestItemKey = "";
-                	
+
                 if (items.Count > 0)
                 {
-                	latestItemKey = items.Last().Key;
+                    latestItemKey = items.Last().Key;
                 }
 
                 if (this.settings.OrderDesc)
@@ -269,10 +293,10 @@ namespace TextEimer.Windows
                     );
 
                     this.notifyIconMenu.Items.Add(currentItem);
-                    
+
                     if (latestItemKey == item.Key)
                     {
-                    	currentItem.Select();
+                        currentItem.Select();
                     }
                 }
 
