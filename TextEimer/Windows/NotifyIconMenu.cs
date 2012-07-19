@@ -56,7 +56,7 @@ namespace TextEimer.Windows
         }
 
         /// <summary>
-        /// deletes an item from the TextEimer item list with the "del" resp "entf" keyboard key
+        /// handles special keys on a selected ToolStripItem
         /// </summary>
         /// <param name="sender">sender object of eventhandler</param>
         /// <param name="e">event aruments of eventhandler</param>
@@ -71,6 +71,7 @@ namespace TextEimer.Windows
                         if (this.notifyIconMenu.Items.ContainsKey(item.Name))
                         {
                             this.AddToClipboard(item, false);
+                            this.notifyIconMenu.Close(ToolStripDropDownCloseReason.Keyboard);
                         }
                         break;
                     }
