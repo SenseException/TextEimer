@@ -29,20 +29,139 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Options));
+            this.optionTab = new System.Windows.Forms.TabControl();
+            this.settingsTab = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.labelMenuItemAmount = new System.Windows.Forms.Label();
+            this.trackBarMenuItemAmount = new System.Windows.Forms.TrackBar();
+            this.groupBoxOrderDesc = new System.Windows.Forms.GroupBox();
+            this.radioOrderDesc2 = new System.Windows.Forms.RadioButton();
+            this.radioOrderDesc1 = new System.Windows.Forms.RadioButton();
+            this.optionTab.SuspendLayout();
+            this.settingsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarMenuItemAmount)).BeginInit();
+            this.groupBoxOrderDesc.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // optionTab
+            // 
+            this.optionTab.Controls.Add(this.settingsTab);
+            this.optionTab.Controls.Add(this.tabPage2);
+            this.optionTab.Location = new System.Drawing.Point(1, 1);
+            this.optionTab.Name = "optionTab";
+            this.optionTab.SelectedIndex = 0;
+            this.optionTab.Size = new System.Drawing.Size(572, 361);
+            this.optionTab.TabIndex = 0;
+            // 
+            // settingsTab
+            // 
+            this.settingsTab.Controls.Add(this.groupBoxOrderDesc);
+            this.settingsTab.Controls.Add(this.trackBarMenuItemAmount);
+            this.settingsTab.Controls.Add(this.labelMenuItemAmount);
+            this.settingsTab.Location = new System.Drawing.Point(4, 22);
+            this.settingsTab.Name = "settingsTab";
+            this.settingsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.settingsTab.Size = new System.Drawing.Size(564, 335);
+            this.settingsTab.TabIndex = 0;
+            this.settingsTab.Text = "Einstellungen";
+            this.settingsTab.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(564, 335);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // labelMenuItemAmount
+            // 
+            this.labelMenuItemAmount.AutoSize = true;
+            this.labelMenuItemAmount.Location = new System.Drawing.Point(13, 15);
+            this.labelMenuItemAmount.Name = "labelMenuItemAmount";
+            this.labelMenuItemAmount.Size = new System.Drawing.Size(130, 13);
+            this.labelMenuItemAmount.TabIndex = 0;
+            this.labelMenuItemAmount.Text = "Anzahl der Clipboardwerte";
+            // 
+            // trackBarMenuItemAmount
+            // 
+            this.trackBarMenuItemAmount.Location = new System.Drawing.Point(16, 31);
+            this.trackBarMenuItemAmount.Maximum = 50;
+            this.trackBarMenuItemAmount.Minimum = 1;
+            this.trackBarMenuItemAmount.Name = "trackBarMenuItemAmount";
+            this.trackBarMenuItemAmount.Size = new System.Drawing.Size(537, 45);
+            this.trackBarMenuItemAmount.TabIndex = 1;
+            this.trackBarMenuItemAmount.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBarMenuItemAmount.Value = 1;
+            // 
+            // groupBoxOrderDesc
+            // 
+            this.groupBoxOrderDesc.Controls.Add(this.radioOrderDesc2);
+            this.groupBoxOrderDesc.Controls.Add(this.radioOrderDesc1);
+            this.groupBoxOrderDesc.Location = new System.Drawing.Point(16, 82);
+            this.groupBoxOrderDesc.Name = "groupBoxOrderDesc";
+            this.groupBoxOrderDesc.Size = new System.Drawing.Size(198, 49);
+            this.groupBoxOrderDesc.TabIndex = 5;
+            this.groupBoxOrderDesc.TabStop = false;
+            this.groupBoxOrderDesc.Text = "Sortierung";
+            // 
+            // radioOrderDesc2
+            // 
+            this.radioOrderDesc2.AutoSize = true;
+            this.radioOrderDesc2.Location = new System.Drawing.Point(102, 19);
+            this.radioOrderDesc2.Name = "radioOrderDesc2";
+            this.radioOrderDesc2.Size = new System.Drawing.Size(81, 17);
+            this.radioOrderDesc2.TabIndex = 6;
+            this.radioOrderDesc2.Text = "Aufsteigend";
+            this.radioOrderDesc2.UseVisualStyleBackColor = true;
+            // 
+            // radioOrderDesc1
+            // 
+            this.radioOrderDesc1.AutoSize = true;
+            this.radioOrderDesc1.Checked = true;
+            this.radioOrderDesc1.Location = new System.Drawing.Point(6, 19);
+            this.radioOrderDesc1.Name = "radioOrderDesc1";
+            this.radioOrderDesc1.Size = new System.Drawing.Size(78, 17);
+            this.radioOrderDesc1.TabIndex = 5;
+            this.radioOrderDesc1.TabStop = true;
+            this.radioOrderDesc1.Text = "Absteigend";
+            this.radioOrderDesc1.UseVisualStyleBackColor = true;
             // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(572, 361);
+            this.Controls.Add(this.optionTab);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(578, 385);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(578, 385);
             this.Name = "Options";
-            this.Text = "Options";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Einstellungen";
+            this.optionTab.ResumeLayout(false);
+            this.settingsTab.ResumeLayout(false);
+            this.settingsTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarMenuItemAmount)).EndInit();
+            this.groupBoxOrderDesc.ResumeLayout(false);
+            this.groupBoxOrderDesc.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TabControl optionTab;
+        private System.Windows.Forms.TabPage settingsTab;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label labelMenuItemAmount;
+        private System.Windows.Forms.TrackBar trackBarMenuItemAmount;
+        private System.Windows.Forms.GroupBox groupBoxOrderDesc;
+        private System.Windows.Forms.RadioButton radioOrderDesc2;
+        private System.Windows.Forms.RadioButton radioOrderDesc1;
     }
 }
