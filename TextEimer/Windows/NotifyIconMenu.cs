@@ -68,7 +68,7 @@ namespace TextEimer.Windows
                 {
                     if (item.Selected)
                     {
-                        if (this.notifyIconMenu.Items.ContainsKey(item.Name))
+                        if (this.Contains(item.Name))
                         {
                             this.AddToClipboard(item, false);
                             this.notifyIconMenu.Close(ToolStripDropDownCloseReason.Keyboard);
