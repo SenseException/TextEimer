@@ -13,7 +13,7 @@ namespace TextEimer
 {
     public partial class Options : Form
     {
-        Settings settings;
+        private Settings settings;
 
         public Options(Settings settings)
         {
