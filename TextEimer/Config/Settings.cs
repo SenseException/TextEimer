@@ -7,7 +7,7 @@ using System.Configuration;
 namespace TextEimer.Config
 {
     // TODO create own config format in later versions
-    class Settings
+    public class Settings
     {   
         public Settings()
         {
