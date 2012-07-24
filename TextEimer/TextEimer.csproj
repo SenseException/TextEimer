@@ -72,6 +72,7 @@
     <Compile Include="Windows\ForegroundWindow.cs" />
     <Compile Include="Windows\NotifyIconSymbol.cs" />
     <Compile Include="Windows\NotifyIconMenu.cs" />
+    <Compile Include="Windows\MenuItems\MenuItem.cs" />
     <EmbeddedResource Include="Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
     </EmbeddedResource>
