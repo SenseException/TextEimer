@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 
 using TextEimer.Clipboard.Container.Type;
 using TextEimer.Config;
+using Menu = TextEimer.Windows.MenuItems;
 using Clip = System.Windows.Forms.Clipboard;
 
 namespace TextEimer.Windows
@@ -17,6 +18,7 @@ namespace TextEimer.Windows
         private Settings settings;
         private ToolStripSeparator toolStripSeparator;
         private List<IType> items;
+        private List<Menu.MenuItem> menuItem;
 
         /// <summary>
         /// Contructor of NotifyIconMenu class.
@@ -30,6 +32,7 @@ namespace TextEimer.Windows
             this.settings = settings;
 
             this.items = new List<IType>();
+            this.menuItem = new List<Menu.MenuItem>();
             this.notifyIconMenu.KeyUp += SelectedToolStripItem_KeyUp;
 
         }
@@ -234,7 +237,7 @@ namespace TextEimer.Windows
                 this.items.Add(typeContainer);
 
                 // remove oldest entry if count of items is bigger than the defined limit
-                if (this.items.Count >= this.settings.MenuItemAmount)
+                if (this.items.Count > this.settings.MenuItemAmount)
                 {
                     this.items.Remove(this.items.First());
                 }
@@ -250,15 +253,22 @@ namespace TextEimer.Windows
         /// </summary>
         private void AddControlMenuItems()
         {
-            this.toolStripSeparator = new ToolStripSeparator();
-            this.notifyIconMenu.Items.Add(this.toolStripSeparator);
+            foreach (Menu.MenuItem item in this.menuItem)
+            {
+                this.notifyIconMenu.Items.Add(item.GetToolStripItem());
+            }
+        }
 
-            this.notifyIconMenu.Items.Add(new ToolStripMenuItem(
-                "Beenden",
-                null,
-                new EventHandler(Quit_Click),
-                "exit"
-            ));
+        public void AddMenuItem(Menu.MenuItem menuItem)
+        {
+            try
+            {
+                this.menuItem.Add(menuItem);
+            }
+            catch (Exception e)
+            {
+                // TODO log Exception when log-class is ready
+            }
         }
 
         /// <summary>

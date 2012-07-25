@@ -9,7 +9,7 @@ namespace TextEimer.Windows.MenuItems
 {
     public class QuitItem : MenuItem
     {
-        public QuitItem(string name, string text)
+        public QuitItem(string text, string name)
         {
             this.toolStripItem = new ToolStripMenuItem(
                 text,

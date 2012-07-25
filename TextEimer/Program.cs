@@ -30,6 +30,9 @@ namespace TextEimer
                 ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
                 NotifyIconMenu notifyIconMenu = new NotifyIconMenu(contextMenuStrip, settings);
                 notifyIconMenu.FocusHandler = foregroundWindow;
+                notifyIconMenu.AddMenuItem(new TextEimer.Windows.MenuItems.Separator());
+                notifyIconMenu.AddMenuItem(new TextEimer.Windows.MenuItems.Options("Optionen", settings));
+                notifyIconMenu.AddMenuItem(new TextEimer.Windows.MenuItems.QuitItem("Beenden", "quit"));
                 #endregion
 
                 #region NotifyIcon

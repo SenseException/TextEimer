@@ -6,11 +6,11 @@ using System.Windows.Forms;
 
 namespace TextEimer.Windows.MenuItems
 {
-    abstract class MenuItem
+    public abstract class MenuItem
     {
         protected ToolStripItem toolStripItem;
 
-        public ToolStripItem getToolStripItem()
+        public ToolStripItem GetToolStripItem()
         {
             return this.toolStripItem;
         }
