@@ -40,6 +40,7 @@
             this.radioOrderDesc1 = new System.Windows.Forms.RadioButton();
             this.trackBarMenuItemAmount = new System.Windows.Forms.TrackBar();
             this.labelMenuItemAmount = new System.Windows.Forms.Label();
+            this.labelTrackBarValue = new System.Windows.Forms.Label();
             this.optionTab.SuspendLayout();
             this.settingsTab.SuspendLayout();
             this.groupBoxLogginOn.SuspendLayout();
@@ -58,6 +59,8 @@
             // 
             // settingsTab
             // 
+            this.settingsTab.BackColor = System.Drawing.SystemColors.Control;
+            this.settingsTab.Controls.Add(this.labelTrackBarValue);
             this.settingsTab.Controls.Add(this.groupBoxLogginOn);
             this.settingsTab.Controls.Add(this.buttonSave);
             this.settingsTab.Controls.Add(this.buttonCancel);
@@ -70,7 +73,6 @@
             this.settingsTab.Size = new System.Drawing.Size(564, 335);
             this.settingsTab.TabIndex = 0;
             this.settingsTab.Text = "Einstellungen";
-            this.settingsTab.UseVisualStyleBackColor = true;
             // 
             // groupBoxLogginOn
             // 
@@ -167,6 +169,15 @@
             this.labelMenuItemAmount.TabIndex = 0;
             this.labelMenuItemAmount.Text = "Anzahl der Clipboardwerte";
             // 
+            // labelTrackBarValue
+            // 
+            this.labelTrackBarValue.AutoSize = true;
+            this.labelTrackBarValue.Location = new System.Drawing.Point(257, 58);
+            this.labelTrackBarValue.Name = "labelTrackBarValue";
+            this.labelTrackBarValue.Size = new System.Drawing.Size(13, 13);
+            this.labelTrackBarValue.TabIndex = 9;
+            this.labelTrackBarValue.Text = "0";
+            // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -206,5 +217,6 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.GroupBox groupBoxLogginOn;
         private System.Windows.Forms.CheckBox checkBoxLoggingOn;
+        private System.Windows.Forms.Label labelTrackBarValue;
     }
 }

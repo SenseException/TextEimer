@@ -70,9 +70,15 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windows\ForegroundWindow.cs" />
+    <Compile Include="Windows\MenuItems\CodeSnippets.cs" />
+    <Compile Include="Windows\MenuItems\DropDownItem.cs" />
+    <Compile Include="Windows\MenuItems\Options.cs" />
+    <Compile Include="Windows\MenuItems\QuitItem.cs" />
+    <Compile Include="Windows\MenuItems\Separator.cs" />
     <Compile Include="Windows\NotifyIconSymbol.cs" />
     <Compile Include="Windows\NotifyIconMenu.cs" />
     <Compile Include="Windows\MenuItems\MenuItem.cs" />
+	<Compile Include="Log\Writer.cs" />
     <EmbeddedResource Include="Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
     </EmbeddedResource>

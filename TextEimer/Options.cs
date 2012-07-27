@@ -43,7 +43,9 @@ namespace TextEimer
                 this.radioOrderDesc2.Checked = true;
             }
 
-            this.trackBarMenuItemAmount.Value = this.settings.MenuItemAmount;
+            int value = this.settings.MenuItemAmount;
+            this.trackBarMenuItemAmount.Value = value;
+            this.labelTrackBarValue.Text = value.ToString();
 
         }
 
@@ -118,7 +120,9 @@ namespace TextEimer
         /// <param name="e">EventArgs object</param>
         private void trackBarMenuItemAmount_Scroll(object sender, EventArgs e)
         {
-            this.settings.MenuItemAmount = this.trackBarMenuItemAmount.Value;
+            int value = this.trackBarMenuItemAmount.Value;
+            this.settings.MenuItemAmount = value;
+            this.labelTrackBarValue.Text = value.ToString();
         }
     }
 }
