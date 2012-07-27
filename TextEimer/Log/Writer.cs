@@ -11,44 +11,54 @@ namespace TextEimer.Log
 	public class Writer
 	{
 		private Settings settings;
-		private string logFilePath = null;
+		private string logFilePath;
 		
 		public Writer(Settings settings)
 		{
 			this.settings = settings;
+            this.logFilePath = Path.GetTempPath() + "TextEimer.log";
 		}
 		
 		public void Write(string message, Exception e = null)
 		{
-			// TODO use exception object for logs
-			// TODO add settings check of LoggingOn
-			StreamWriter log;
-			string filePath = this.FilePath;
+            if (this.settings.LoggingOn)
+            {
+                StreamWriter log;
+                string filePath = this.FilePath;
 
-			if (!File.Exists(filePath))
-			{
-			  log = new StreamWriter(filePath);
-			}
-			else
-			{
-			  log = File.AppendText(filePath);
-			}
-			
-			log.Write(DateTime.Now);
-			log.WriteLine(message);
-			
-			log.Close();
+                if (!File.Exists(filePath))
+                {
+                    log = new StreamWriter(filePath);
+                }
+                else
+                {
+                    log = File.AppendText(filePath);
+                }
+
+                if ("" == message && null != e)
+                {
+                    message = e.Message;
+                }
+
+                log.Write(DateTime.Now.ToString());
+                log.WriteLine(message);
+
+                if (null != e)
+                {
+                    log.WriteLine();
+                    log.WriteLine(e.StackTrace);
+                }
+                log.WriteLine("###########################");
+
+                log.Flush();
+                log.Close();
+            }
 		}
 		
 		public string FilePath
 		{
 			get
 			{
-				if (null == this.logFilePath)
-				{
-					this.logFilePath = Path.GetTempPath();
-				}
-				
 				return this.logFilePath;
 			}
 			set

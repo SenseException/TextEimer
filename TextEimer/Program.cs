@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Configuration;
 
 using TextEimer.Windows;
+using TextEimer.Log;
 using TextEimer.Clipboard;
 using TextEimer.Config;
 using MovablePython;
@@ -23,6 +24,8 @@ namespace TextEimer
                 Application.SetCompatibleTextRenderingDefault(false);
 
                 Settings settings = new Settings();
+
+                Writer log = new Writer(settings);
 
                 ForegroundWindow foregroundWindow = new ForegroundWindow();
 
