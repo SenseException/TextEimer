@@ -82,5 +82,29 @@ namespace TextEimer.Properties {
                 this["LoggingOn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int MenuPosX {
+            get {
+                return ((int)(this["MenuPosX"]));
+            }
+            set {
+                this["MenuPosX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int MenuPosY {
+            get {
+                return ((int)(this["MenuPosY"]));
+            }
+            set {
+                this["MenuPosY"] = value;
+            }
+        }
     }
 }

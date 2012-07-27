@@ -67,6 +67,30 @@ namespace TextEimer.Config
             }
         }
 
+        public int MenuPosX
+        {
+            get
+            {
+                return Properties.Settings.Default.MenuPosX;
+            }
+            set
+            {
+                Properties.Settings.Default.MenuPosX = value;
+            }
+        }
+
+        public int MenuPosY
+        {
+            get
+            {
+                return Properties.Settings.Default.MenuPosY;
+            }
+            set
+            {
+                Properties.Settings.Default.MenuPosY = value;
+            }
+        }
+
         public void Save()
         {
             Properties.Settings.Default.Save();
