@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 using TextEimer.Clipboard.Container.Type;
+using TextEimer.Log;
 using TextEimer.Config;
 using Menu = TextEimer.Windows.MenuItems;
 using Clip = System.Windows.Forms.Clipboard;
@@ -16,9 +17,9 @@ namespace TextEimer.Windows
         private ForegroundWindow foregroundWindow = null;
         private ContextMenuStrip notifyIconMenu;
         private Settings settings;
-        private ToolStripSeparator toolStripSeparator;
         private List<IType> items;
         private List<Menu.MenuItem> menuItem;
+        private Writer logWriter = null;
 
         /// <summary>
         /// Contructor of NotifyIconMenu class.
@@ -35,16 +36,6 @@ namespace TextEimer.Windows
             this.menuItem = new List<Menu.MenuItem>();
             this.notifyIconMenu.KeyUp += SelectedToolStripItem_KeyUp;
 
-        }
-
-        /// <summary>
-        /// Click Event which exits TextEimer
-        /// </summary>
-        /// <param name="sender">sender object</param>
-        /// <param name="e">Event Arguments</param>
-        private void Quit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         /// <summary>
@@ -138,7 +129,7 @@ namespace TextEimer.Windows
             }
             catch (Exception e)
             {
-                // TODO log Exception when log-class is ready
+                this.WriteLog(e.Message, e);
             }
 
             return typeContainer;
@@ -157,7 +148,7 @@ namespace TextEimer.Windows
             }
             catch (Exception e)
             {
-                // TODO log Exception when log-class is ready
+                this.WriteLog(e.Message, e);
             }
         }
 
@@ -180,7 +171,7 @@ namespace TextEimer.Windows
             }
             catch (Exception e)
             {
-                // TODO log Exception when log-class is ready
+                this.WriteLog(e.Message, e);
             }
 
             return containsKey;
@@ -217,6 +208,18 @@ namespace TextEimer.Windows
             get
             {
                 return this.foregroundWindow;
+            }
+        }
+
+        public Writer LogWriter
+        {
+            get
+            {
+                return this.logWriter;
+            }
+            set
+            {
+                this.logWriter = value;
             }
         }
 
@@ -267,7 +270,7 @@ namespace TextEimer.Windows
             }
             catch (Exception e)
             {
-                // TODO log Exception when log-class is ready
+                this.WriteLog(e.Message, e);
             }
         }
 
@@ -316,6 +319,14 @@ namespace TextEimer.Windows
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void WriteLog(string message, Exception e)
+        {
+            if (null != this.logWriter)
+            {
+                this.logWriter.Write(e.Message, e);
             }
         }
     }

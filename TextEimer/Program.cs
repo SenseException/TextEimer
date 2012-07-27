@@ -36,6 +36,7 @@ namespace TextEimer
                 notifyIconMenu.AddMenuItem(new TextEimer.Windows.MenuItems.Separator());
                 notifyIconMenu.AddMenuItem(new TextEimer.Windows.MenuItems.Options("Optionen", settings));
                 notifyIconMenu.AddMenuItem(new TextEimer.Windows.MenuItems.QuitItem("Beenden", "quit"));
+                notifyIconMenu.LogWriter = log;
                 #endregion
 
                 #region NotifyIcon
