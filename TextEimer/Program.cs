@@ -50,6 +50,7 @@ namespace TextEimer
                 #endregion
 
                 ClipboardHandler clipboardHandler = new ClipboardHandler(notifyIconMenu);
+                clipboardHandler.LogWriter = log;
 
                 #region global Hotkey
                 Hotkey hk = new Hotkey();

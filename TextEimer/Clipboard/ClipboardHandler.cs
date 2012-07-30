@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using TextEimer.Clipboard.Container;
 using ContainerType = TextEimer.Clipboard.Container.Type;
 using TextEimer.Windows;
+using TextEimer.Log;
 
 namespace TextEimer.Clipboard
 {
@@ -35,6 +36,7 @@ namespace TextEimer.Clipboard
         private System.ComponentModel.Container components = null;
         
         private NotifyIconMenu notifyIconMenu;
+        private Writer logWriter = null;
 
         public ClipboardHandler(NotifyIconMenu notifyIconMenu)
         {
@@ -85,7 +87,10 @@ namespace TextEimer.Clipboard
             		}
             		catch(NullReferenceException e)
             		{
-            			// TODO log Exception when log-class is ready
+                        if (null != this.logWriter)
+                        {
+                            this.logWriter.Write(e.Message, e);
+                        }
             		}
 
                     break;
@@ -100,6 +105,18 @@ namespace TextEimer.Clipboard
                 default:
                     base.WndProc(ref m);
                     break;
+            }
+        }
+
+        public Writer LogWriter
+        {
+            get
+            {
+                return this.logWriter;
+            }
+            set
+            {
+                this.logWriter = value;
             }
         }
     }
