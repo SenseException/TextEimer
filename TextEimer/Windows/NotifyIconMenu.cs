@@ -81,12 +81,12 @@ namespace TextEimer.Windows
                         if (this.Contains(item.Name))
                         {
                             this.RemoveByKey(item.Name);
-                        }
 
-                        // if ToolStripItem is not in Control element then delete ToolStripItem
-                        if (this.notifyIconMenu.Items.ContainsKey(item.Name))
-                        {
-                            this.notifyIconMenu.Items.RemoveByKey(item.Name);
+                            // if ToolStripItem is not in Control element then delete ToolStripItem
+                            if (this.notifyIconMenu.Items.ContainsKey(item.Name))
+                            {
+                                this.notifyIconMenu.Items.RemoveByKey(item.Name);
+                            }
                         }
                         break;
                     }
