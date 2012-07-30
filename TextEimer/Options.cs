@@ -14,6 +14,10 @@ namespace TextEimer
     public partial class Options : Form
     {
         private Settings settings;
+        
+        private bool loggingOn;
+        private bool orderDesc;
+        private int menuItemAmount;
 
         public Options(Settings settings)
         {
@@ -28,23 +32,28 @@ namespace TextEimer
             if (this.settings.LoggingOn)
             {
                 this.checkBoxLoggingOn.Checked = true;
+                this.loggingOn = true;
             }
             else
             {
                 this.checkBoxLoggingOn.Checked = false;
+                this.loggingOn = false;
             }
 
             if (!this.settings.OrderDesc)
             {
                 this.radioOrderDesc1.Checked = true;
+                this.orderDesc = false;
             }
             if (this.settings.OrderDesc)
             {
                 this.radioOrderDesc2.Checked = true;
+                this.orderDesc = true;
             }
 
             int value = this.settings.MenuItemAmount;
             this.trackBarMenuItemAmount.Value = value;
+            this.menuItemAmount = value;
             this.labelTrackBarValue.Text = value.ToString();
 
         }
@@ -66,7 +75,10 @@ namespace TextEimer
         /// <param name="e">EventArgs object</param>
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            this.settings.Save();
+            this.settings.MenuItemAmount = this.menuItemAmount;
+            this.settings.OrderDesc = this.orderDesc;
+            this.settings.LoggingOn = this.loggingOn;
+        	this.settings.Save();
             this.Close();
         }
 
@@ -79,11 +91,11 @@ namespace TextEimer
         {
             if (this.checkBoxLoggingOn.Checked)
             {
-                this.settings.LoggingOn = true;
+                this.loggingOn = true;
             }
             else
             {
-                this.settings.LoggingOn = false;
+                this.loggingOn = false;
             }
         }
 
@@ -96,7 +108,7 @@ namespace TextEimer
         {
             if (this.radioOrderDesc1.Checked)
             {
-                this.settings.OrderDesc = false;
+                this.orderDesc = false;
             }
         }
 
@@ -109,7 +121,7 @@ namespace TextEimer
         {
             if (this.radioOrderDesc2.Checked)
             {
-                this.settings.OrderDesc = true;
+                this.orderDesc = true;
             }
         }
 
@@ -121,7 +133,7 @@ namespace TextEimer
         private void trackBarMenuItemAmount_Scroll(object sender, EventArgs e)
         {
             int value = this.trackBarMenuItemAmount.Value;
-            this.settings.MenuItemAmount = value;
+            this.menuItemAmount = value;
             this.labelTrackBarValue.Text = value.ToString();
         }
     }
