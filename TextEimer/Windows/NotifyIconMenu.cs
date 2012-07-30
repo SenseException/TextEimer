@@ -124,8 +124,11 @@ namespace TextEimer.Windows
             IType typeContainer = null;
             try
             {
-                typeContainer = this.items.Where<IType>(type => type.Key == key).Single<IType>();
-
+                IEnumerable<IType> resultList = this.items.Where<IType>(type => type.Key == key);
+                if (resultList.Count() > 0)
+                {
+                    typeContainer = resultList.Single<IType>();
+                }
             }
             catch (Exception e)
             {
