@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Ein Programm zur Verwaltung und Wiederverwendung von Texten aus dem Clipboard.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TextEimer")]
+[assembly: AssemblyProduct("TextEimer .NET")]
 [assembly: AssemblyCopyright("Copyright © Claudio Zizza 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -60,6 +60,13 @@ namespace TextEimer.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap about {
+            get {
+                object obj = ResourceManager.GetObject("about", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Icon bucket {
             get {
                 object obj = ResourceManager.GetObject("bucket", resourceCulture);

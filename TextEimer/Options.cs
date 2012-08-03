@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Reflection;
 
 using TextEimer.Config;
 
@@ -24,6 +25,7 @@ namespace TextEimer
             InitializeComponent();
             this.settings = settings;
             this.init();
+            this.initAbout();
         }
 
         // TODO add validation of config values
@@ -58,6 +60,17 @@ namespace TextEimer
 
         }
 
+        private void initAbout()
+        {
+            Assembly entryAssembly = Assembly.GetExecutingAssembly();
+
+            this.labelProgramName.Text += Environment.NewLine + Application.ProductName;
+            this.textBoxDescription.Text = this.AssemblyDescription;
+            this.labelVersion.Text += Environment.NewLine + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            this.labelAuthor.Text += Environment.NewLine + this.AssemblyCopyright;
+        }
+
+        #region tab1
         /// <summary>
         /// closes the form without saving settings
         /// </summary>
@@ -136,5 +149,34 @@ namespace TextEimer
             this.menuItemAmount = value;
             this.labelTrackBarValue.Text = value.ToString();
         }
+        #endregion
+
+        #region About
+        public string AssemblyDescription
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    return "";
+                }
+                return ((AssemblyDescriptionAttribute)attributes[0]).Description;
+            }
+        }
+
+        public string AssemblyCopyright
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    return "";
+                }
+                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+            }
+        }
+        #endregion
     }
 }
