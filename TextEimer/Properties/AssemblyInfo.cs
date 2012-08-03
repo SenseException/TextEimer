@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("TextEimer .NET")]
-[assembly: AssemblyCopyright("Copyright © Claudio Zizza 2012")]
+[assembly: AssemblyCopyright("Claudio Zizza")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
