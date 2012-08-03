@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
+using System.IO;
 
 using TextEimer.Config;
 
@@ -19,11 +20,13 @@ namespace TextEimer
         private bool loggingOn;
         private bool orderDesc;
         private int menuItemAmount;
+        private string autostartFile;
 
         public Options(Settings settings)
         {
             InitializeComponent();
             this.settings = settings;
+            this.autostartFile = Environment.GetFolderPath(Environment.SpecialFolder.Startup) + "\\textEimer.url";
             this.init();
             this.initAbout();
         }
@@ -58,6 +61,7 @@ namespace TextEimer
             this.menuItemAmount = value;
             this.labelTrackBarValue.Text = value.ToString();
 
+            this.ChangeAutostartText();
         }
 
         private void initAbout()
@@ -149,6 +153,67 @@ namespace TextEimer
             this.menuItemAmount = value;
             this.labelTrackBarValue.Text = value.ToString();
         }
+
+        /// <summary>
+        /// create Autostart Shortcut
+        /// </summary>
+        private void AddToAutostart()
+        {
+            using (StreamWriter writer = new StreamWriter(this.autostartFile))
+            {
+                string app = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                writer.WriteLine("[InternetShortcut]");
+                writer.WriteLine("URL=file:///" + app);
+                writer.WriteLine("IconIndex=0");
+                string icon = app.Replace('\\', '/');
+                writer.WriteLine("IconFile=" + icon);
+                writer.Flush();
+            }
+        }
+
+        private void ChangeAutostartText()
+        {
+            if (File.Exists(this.autostartFile))
+            {
+                this.buttonAutostart.Text = "Automatischer Start entfernen";
+            }
+            else
+            {
+                this.buttonAutostart.Text = "Automatischer Start hinzufügen";
+            }
+        }
+
+        private void buttonAutostart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (File.Exists(this.autostartFile))
+                {
+                    DialogResult dialog = MessageBox.Show("Soll " + Application.ProductName + " aus dem Autostart entfernt werden?",
+                        "Autostart", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                    if (DialogResult.Yes == dialog)
+                    {
+                        File.Delete(this.autostartFile);
+                        MessageBox.Show(Application.ProductName + " wurde aus dem Autostart entfernt.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    DialogResult dialog = MessageBox.Show("Soll " + Application.ProductName + " beim Systemstart mitgestartet werden?",
+                        "Autostart", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                    if (DialogResult.Yes == dialog)
+                    {
+                        this.AddToAutostart();
+                        MessageBox.Show(Application.ProductName + " wurde unter Autostart eingetragen.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                this.ChangeAutostartText();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         #endregion
 
         #region About
@@ -178,5 +243,6 @@ namespace TextEimer
             }
         }
         #endregion
+
     }
 }

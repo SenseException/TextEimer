@@ -49,6 +49,8 @@
             this.labelDescription = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.pictureBoxAbout = new System.Windows.Forms.PictureBox();
+            this.groupAutostart = new System.Windows.Forms.GroupBox();
+            this.buttonAutostart = new System.Windows.Forms.Button();
             this.optionTab.SuspendLayout();
             this.settingsTab.SuspendLayout();
             this.groupBoxLogginOn.SuspendLayout();
@@ -57,6 +59,7 @@
             this.tabAbout.SuspendLayout();
             this.tableLayoutAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAbout)).BeginInit();
+            this.groupAutostart.SuspendLayout();
             this.SuspendLayout();
             // 
             // optionTab
@@ -72,6 +75,7 @@
             // settingsTab
             // 
             this.settingsTab.BackColor = System.Drawing.SystemColors.Control;
+            this.settingsTab.Controls.Add(this.groupAutostart);
             this.settingsTab.Controls.Add(this.labelTrackBarValue);
             this.settingsTab.Controls.Add(this.groupBoxLogginOn);
             this.settingsTab.Controls.Add(this.buttonSave);
@@ -279,6 +283,25 @@
             this.pictureBoxAbout.TabIndex = 5;
             this.pictureBoxAbout.TabStop = false;
             // 
+            // groupAutostart
+            // 
+            this.groupAutostart.Controls.Add(this.buttonAutostart);
+            this.groupAutostart.Location = new System.Drawing.Point(20, 147);
+            this.groupAutostart.Name = "groupAutostart";
+            this.groupAutostart.Size = new System.Drawing.Size(240, 62);
+            this.groupAutostart.TabIndex = 10;
+            this.groupAutostart.TabStop = false;
+            this.groupAutostart.Text = "Autostart";
+            // 
+            // buttonAutostart
+            // 
+            this.buttonAutostart.Location = new System.Drawing.Point(6, 20);
+            this.buttonAutostart.Name = "buttonAutostart";
+            this.buttonAutostart.Size = new System.Drawing.Size(228, 29);
+            this.buttonAutostart.TabIndex = 0;
+            this.buttonAutostart.UseVisualStyleBackColor = true;
+            this.buttonAutostart.Click += new System.EventHandler(this.buttonAutostart_Click);
+            // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -305,6 +328,7 @@
             this.tableLayoutAbout.ResumeLayout(false);
             this.tableLayoutAbout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAbout)).EndInit();
+            this.groupAutostart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -331,5 +355,7 @@
         private System.Windows.Forms.Label labelAuthor;
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.PictureBox pictureBoxAbout;
+        private System.Windows.Forms.GroupBox groupAutostart;
+        private System.Windows.Forms.Button buttonAutostart;
     }
 }
