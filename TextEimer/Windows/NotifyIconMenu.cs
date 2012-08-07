@@ -287,7 +287,7 @@ namespace TextEimer.Windows
                 this.notifyIconMenu.Items.Clear();
 
                 ToolStripMenuItem currentItem = null;
-                List<IType> items = this.items;
+                List<IType> items = this.GetLastElements(this.settings.MenuItemAmount);
                 string latestItemKey = "";
 
                 if (items.Count > 0)
@@ -323,6 +323,28 @@ namespace TextEimer.Windows
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        /// <summary>
+        /// returns an amount of list elements defined by the MenuItemAmount setting
+        /// </summary>
+        /// <param name="menuItemAmount">an integer which defines the amount of the returned list elements</param>
+        /// <returns>last X list elements of the TextEimer clipboard list</returns>
+        private List<IType> GetLastElements(int menuItemAmount)
+        {
+            int count = this.items.Count;
+            List<IType> items;
+
+            if (count > menuItemAmount)
+            {
+                items = this.items.GetRange(count - menuItemAmount, menuItemAmount);
+            }
+            else
+            {
+                items = this.items;
+            }
+
+            return items;
         }
 
         private void WriteLog(string message, Exception e)
