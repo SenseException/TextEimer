@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 using TextEimer.Clipboard.Container.Type;
 using TextEimer.Log;
@@ -234,18 +235,23 @@ namespace TextEimer.Windows
         {
             try
             {
-                //remove item if same typeContainer exists in list
-                if (this.Contains(typeContainer.Key))
-                {
-                    this.RemoveByKey(typeContainer.Key);
-                }
+                string menuValue = Regex.Replace(typeContainer.MenuValue, "[ ]+", "", RegexOptions.None);
 
-                this.items.Add(typeContainer);
-
-                // remove oldest entry if count of items is bigger than the defined limit
-                if (this.items.Count > this.settings.MenuItemAmount)
+                if ("" != menuValue)
                 {
-                    this.items.Remove(this.items.First());
+                    //remove item if same typeContainer exists in list
+                    if (this.Contains(typeContainer.Key))
+                    {
+                        this.RemoveByKey(typeContainer.Key);
+                    }
+
+                    this.items.Add(typeContainer);
+
+                    // remove oldest entry if count of items is bigger than the defined limit
+                    if (this.items.Count > this.settings.MenuItemAmount)
+                    {
+                        this.items.Remove(this.items.First());
+                    }
                 }
             }
             catch (Exception e)
